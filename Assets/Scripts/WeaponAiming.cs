@@ -5,7 +5,7 @@ public class WeaponAiming : MonoBehaviour {
     [SerializeField] private GameObject weapon;
     private float rotationSpeed = .1f;
 
-    void Update() {
+    void FixedUpdate() {
         AimToCusor();
     }
     /// <summary>
@@ -14,6 +14,17 @@ public class WeaponAiming : MonoBehaviour {
     private void AimToCusor() {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Debug.Log(mousePosition);
+        if(character.transform.localScale.x == -1)
+        {
+            Vector3 newScale = transform.localScale;
+            newScale.x = -1;
+            transform.localScale = newScale;
+        } else
+        {
+            Vector3 newScale = transform.localScale;
+            newScale.x = 1;
+            transform.localScale = newScale;
+        }
         Vector3 direction = mousePosition - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);  
