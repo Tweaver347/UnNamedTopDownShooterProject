@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShootWeapon : MonoBehaviour
@@ -23,6 +24,8 @@ public class ShootWeapon : MonoBehaviour
     // 3 = Sniper
     // 4 = Railgun
     public int weapon = 1;
+    public float bulletSpeed = 10f;
+    private int shotgunPellets = 5;
 
     private float cooldownTime = .05f;
     private float timeUntilNextShot = 0.0f;
@@ -60,26 +63,80 @@ public class ShootWeapon : MonoBehaviour
                 switch (weapon)
                 {
                     case 1:
-                        audioSource.clip = assaultShoot;
+                        StartCoroutine(FullAuto());
+                        timeUntilNextShot = Time.time + cooldownTime; 
+
                         break;
                     case 2:
                         audioSource.clip = shotgunShoot;
+
+                        shotgunSpread(shotgunPellets, shotgunBullet);
+
+                        audioSource.Play();
+                        timeUntilNextShot = Time.time + cooldownTime;
+
                         break;
                     case 3:
                         audioSource.clip = sniperShoot;
+                        SpawnBullet();
+                        audioSource.Play();
+                        timeUntilNextShot = Time.time + cooldownTime;
+
                         break;
                     case 4:
+
                         audioSource.clip = railgunShoot;
+                        audioSource.Play();
+                        StartCoroutine(WaitAndSpawnBullet());
+                        timeUntilNextShot = Time.time + cooldownTime;
                         break;
                     default:
                         break;
                 }
-                SpawnBullet();
-                audioSource.Play();
-                timeUntilNextShot = Time.time + cooldownTime; // Fire Rate
             }
         }
     }
+
+    IEnumerator WaitAndSpawnBullet()
+    {
+        yield return new WaitForSeconds(1.25f); // Wait for 2 seconds
+        SpawnBullet();
+    }
+
+    IEnumerator FullAuto()
+    {
+         AudioSource audioSource = GetComponent<AudioSource>();
+        while (Input.GetMouseButton(0))
+        {
+
+           audioSource.clip = assaultShoot;
+           SpawnBullet();
+           audioSource.Play();
+           yield return new WaitForSeconds(0.1f); // Set the interval between shots here
+        }
+    }
+    /// <summary>
+    /// Spawns N Number of bullets in a random spread 
+    /// </summary>
+    private void shotgunSpread(int n, GameObject bulletPrefab)
+    {
+        float spread = 35f; // The angle of the spread in degrees
+        float bulletSpeed = 8.5f; // The speed of the bullets
+
+        for (int i = 0; i < n; i++)
+        {
+            // Calculate the angle of the bullet
+            float angle = transform.eulerAngles.z - spread / 2 + Random.Range(0f, 1f) * spread;
+
+            // Spawn the bullet
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0f, 0f, angle));
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            rb.velocity = bullet.transform.right * bulletSpeed;
+        }
+    }
+
+
+
 
     /// <summary>
     /// instantiate bullet with movement towards raycast point
@@ -87,26 +144,21 @@ public class ShootWeapon : MonoBehaviour
     private void SpawnBullet()
     {
         GameObject bulletPrefab = null;
-        float bulletSpeed = 10f;
 
         // Select bullet prefab and speed based on weapon
         switch (weapon)
         {
             case 1:
                 bulletPrefab = assaultBullet;
-                bulletSpeed = 10;
-                break;
-            case 2:
-                bulletPrefab = shotgunBullet;
-                bulletSpeed = 10;
+                bulletSpeed = 10f;
                 break;
             case 3:
                 bulletPrefab = sniperBullet;
-                bulletSpeed = 10;
+                bulletSpeed = 20f;
                 break;
             case 4:
                 bulletPrefab = railgunBullet;
-                bulletSpeed = 10;
+                bulletSpeed = 15f;
                 break;
             default:
                 break;
@@ -122,6 +174,6 @@ public class ShootWeapon : MonoBehaviour
 
         GameObject bulletInstance = Instantiate(bulletPrefab, transform.position, targetRotation);
         Rigidbody2D bulletRigidbody = bulletInstance.GetComponent<Rigidbody2D>();
-        bulletRigidbody.AddForce(direction.normalized * bulletSpeed, ForceMode2D.Impulse);
+        bulletRigidbody.velocity = bulletInstance.transform.right * bulletSpeed;
     }
 }
