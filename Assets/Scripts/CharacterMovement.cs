@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 7f;
     public Animator animator;
-
-    private bool facingRight = true;
+    public SpriteRenderer spriteRend;
 
     void Update()
     {
@@ -15,29 +14,20 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, verticalInput, 0f) * speed * Time.deltaTime;
         transform.position += movement;
 
-        if (horizontalInput != 0 || verticalInput != 0)
-        {
+        if (horizontalInput != 0 || verticalInput != 0) {
             animator.SetBool("isWalking", true);
-            if (horizontalInput > 0 && !facingRight)
-            {
-                Flip();
-            }
-            else if (horizontalInput < 0 && facingRight)
-            {
-                Flip();
-            }
+        } else {
+            animator.SetBool("isWalking", false);
+        }
+
+        if (horizontalInput >= 0)
+        {
+            spriteRend.flipX = false;
         }
         else
         {
-            animator.SetBool("isWalking", false);
+            spriteRend.flipX = true;
         }
-    }
 
-    void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
     }
 }
