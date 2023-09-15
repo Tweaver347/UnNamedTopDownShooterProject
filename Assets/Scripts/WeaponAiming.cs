@@ -14,7 +14,6 @@ public class WeaponAiming : MonoBehaviour {
     private void AimToCusor() {
         //Get position of mouse in world coordinates
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
 
         Vector3 direction = mousePosition - transform.position;
 
@@ -28,12 +27,6 @@ public class WeaponAiming : MonoBehaviour {
             weaponSpriteRend.flipY = false;
         }
 
-
-
-
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed);
-        Debug.Log(transform.rotation);
-    }
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed);    }
 }
