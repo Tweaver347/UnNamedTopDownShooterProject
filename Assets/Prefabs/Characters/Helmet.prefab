@@ -264,7 +264,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 100
   orthographic: 1
   orthographic size: 9.187176
   m_Depth: -1
@@ -347,6 +347,8 @@ GameObject:
   - component: {fileID: 4290179707621829187}
   - component: {fileID: 5256652663508165099}
   - component: {fileID: 7620690536803823523}
+  - component: {fileID: 6834149041984155832}
+  - component: {fileID: 6905029745261279644}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -437,9 +439,125 @@ MonoBehaviour:
   shotgun: {fileID: 6287046436752119325, guid: a9ff5a190d3839945a4fd65526268a4b, type: 3}
   sniper: {fileID: 5839493703869643927, guid: c909494e067f70a4095a515c8124864a, type: 3}
   railgun: {fileID: 7723342579239939853, guid: fe521280589fbf34ba828bbaceb02eeb, type: 3}
-  arCross: {fileID: 0}
-  shotCross: {fileID: 0}
-  sniperCross: {fileID: 0}
-  railCross: {fileID: 0}
-  weaponSpriteRend: {fileID: 0}
+  arCross: {fileID: 1599954857733062662, guid: c9119801e53e0604bbe4d0cb5f645491, type: 3}
+  shotCross: {fileID: 3269811052000410988, guid: 4c5a289601779264da3bd227ae77d2f9, type: 3}
+  sniperCross: {fileID: 2812682481525575961, guid: eb1fc94a21b86274bad457c1c096d76a, type: 3}
+  railCross: {fileID: 5948395628842430706, guid: 87c637e68eb28f34391dccd60319036d, type: 3}
+  weaponSpriteRend: {fileID: 5256652663508165099}
   crossSpriteRend: {fileID: 0}
+--- !u!114 &6834149041984155832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105280522988226039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c2e31d9cf5cc948ab341cf22896594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assaultShoot: {fileID: 8300000, guid: 92d35fe1c59bbd14eaee9e3d3b54cea7, type: 3}
+  shotgunShoot: {fileID: 8300000, guid: 3dc7b4438e9f788479f2eba0e75191b1, type: 3}
+  sniperShoot: {fileID: 8300000, guid: 947719fd38845824ba3638af9d8e4e54, type: 3}
+  railgunShoot: {fileID: 8300000, guid: ade03cc41862efe45a14c4802b87b026, type: 3}
+  assaultReload: {fileID: 8300000, guid: 2868e580baee45d449931dc35a5ace81, type: 3}
+  shotgunReload: {fileID: 8300000, guid: 6a32a0d49cd240b4cb9934adf37a49a5, type: 3}
+  sniperReload: {fileID: 8300000, guid: 8f268095f67575b44b10ea19a4482b2c, type: 3}
+  weapon: 1
+--- !u!82 &6905029745261279644
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105280522988226039}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

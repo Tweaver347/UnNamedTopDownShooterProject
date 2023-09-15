@@ -44,8 +44,6 @@ public class SwapWeapons : MonoBehaviour
                 crossSpriteRend.sprite = railCross.GetComponent<SpriteRenderer>().sprite;
                 break;
             default:
-                weaponSpriteRend.sprite = assault.GetComponent<SpriteRenderer>().sprite;
-                crossSpriteRend.sprite = arCross.GetComponent<SpriteRenderer>().sprite;
                 break;
         }
     }
